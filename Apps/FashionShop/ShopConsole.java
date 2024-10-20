@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 class ShopConsole {
 	final private Scanner input = new Scanner(System.in);
+	final private String textYellow = "\u001B[33m";
+	final private String textReset = "\u001B[0m";
 
 	public void clearAll () {
 		try {
@@ -23,11 +25,19 @@ class ShopConsole {
 		System.out.flush();
 	}
 
+	private String getInputString () {
+		System.out.print(this.textYellow);
+		final String str = input.nextLine();
+		System.out.print(this.textReset);
+
+		return str;
+	}
+
 	public int getInteger (String message) {
 		while (true) {
 			System.out.print(message);
-			final String str = input.nextLine();
-			
+			final String str = this.getInputString();
+
 			if (str.matches("^(\\d+)$")) return Integer.parseInt(str);
 
 			this.clearLine(1);
@@ -37,8 +47,8 @@ class ShopConsole {
 	public double getDouble (String message) {
 		while (true) {
 			System.out.print(message);
-			final String str = input.nextLine();
-			
+			final String str = this.getInputString();
+
 			if (str.matches("^(\\d+)(\\.\\d+)?$")) return Double.parseDouble(str);
 
 			this.clearLine(1);
@@ -47,6 +57,36 @@ class ShopConsole {
 
 	public String getString (String message) {
 		System.out.print(message);
-		return input.nextLine();
+		return this.getInputString();
+	}
+
+	public boolean getUserResponse (String message) {
+		while (true) {
+			System.out.print(message);
+			final String str = this.getInputString();
+
+			if (str.length() != 1) {
+				this.clearLine(1);
+				continue;
+			}
+
+			final char firstCh = str.charAt(0);
+
+			if (firstCh == 'y' || firstCh == 'Y') return true;
+			if (firstCh == 'n' || firstCh == 'N') return false;
+
+			this.clearLine(1);
+		}
+	}
+
+	public String getMatchedString (String message, String regex) {
+		while (true) {
+			System.out.print(message);
+			final String str = this.getInputString();
+
+			if (str.matches(regex)) return str;
+
+			this.clearLine(1);
+		}
 	}
 }
