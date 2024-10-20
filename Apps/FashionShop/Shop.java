@@ -10,6 +10,7 @@ class Shop {
 
 	static {
 		ShopData.addSampleData(data);
+		
 		pagesMap.put("home", Shop::homePage);
 		pagesMap.put("place-order", Shop::placeOrder);
 		pagesMap.put("search-customer", Shop::searchCustomer);
@@ -30,7 +31,7 @@ class Shop {
 	}
 
 	public static void main (String[] args) {
-		goToPage("best-in-customers");
+		goToPage("home");
 	}
 
 	public static boolean isValidPage (String pageName) {
@@ -173,8 +174,9 @@ class Shop {
 
 		while (true) {
 			id = console.getInteger(message);
+			int index = data.idList.indexOf(id);
 
-			if (id < data.size) {
+			if (index != -1) {
 				console.clearLine(1);
 				System.out.print(message);
 				System.out.println(data.getOrderID(id - 1));
@@ -229,7 +231,40 @@ class Shop {
 	}
 
 	public static void deleteOrder () {
-		System.out.println("delete-order");
+		final String message = padding + "Enter order ID : ";
+		int id;
+
+		while (true) {
+			id = console.getInteger(message);
+			int index = data.idList.indexOf(id);
+
+			if (index != -1) {
+				console.clearLine(1);
+				System.out.print(message);
+				System.out.println(data.getOrderID(id - 1));
+				break;
+			}
+
+			console.clearLine(1);
+		}
+
+		printRecordData(id);
+		boolean response = console.getUserResponse(padding + "Do you want to delete this order? (y/n) : ");
+		System.out.println();
+
+		if (response) {
+			data.deleteRecord(id);
+			System.out.println(padding + "          Order Deleted!");
+			System.out.println();
+		}
+
+		response = console.getUserResponse(padding + "Do you want to delete another order? (y/n) : ");
+
+		if (response) {
+			goToPage("delete-order");
+		} else {
+			goToPage("home");
+		}
 	}
 
 	public static void customerReports () {

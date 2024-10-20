@@ -165,6 +165,21 @@ class ShopData {
 		this.size++;
 	}
 
+	public void deleteRecord (int id) {
+		int index = this.idList.indexOf(id);
+
+		if (index == -1) return;
+
+		this.idList.remove(index);
+		this.statusList.remove(index);
+		this.phoneList.remove(index);
+		this.sizesList.remove(index);
+		this.qtyList.remove(index);
+		this.amountList.remove(index);
+
+		this.size--;
+	}
+
 	public ShopDataRecord getRecord (int id) {
 		int index = this.idList.indexOf(id);
 
