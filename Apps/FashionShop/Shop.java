@@ -31,7 +31,7 @@ class Shop {
 	}
 
 	public static void main (String[] args) {
-		goToPage("change-status");
+		goToPage("home");
 	}
 
 	public static boolean isValidPage (String pageName) {
