@@ -218,4 +218,27 @@ class ShopData {
 
 		return map;
 	}
+
+	public HashMap<String, int[]> getRecordsAllDetails () {
+		HashMap<String, int[]> map = new HashMap<>();
+
+		for (int i = 0; i < this.idList.size(); i++) {
+			String phone = this.phoneList.get(i);
+			int size = this.sizesList.get(i);
+			int qty = this.qtyList.get(i);
+			int[] sizes;
+
+			if (map.containsKey(phone)) {
+				sizes = map.get(phone);
+			} else {
+				sizes = new int[7];
+				map.put(phone, sizes);
+			}
+
+			sizes[size] += qty;
+			sizes[6] += qty * this.prices[size];
+		}
+
+		return map;
+	}
 }

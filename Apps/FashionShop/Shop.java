@@ -382,7 +382,49 @@ class Shop {
 	}
 
 	public static void allCustomerDetails () {
-		System.out.println("all-customer-details");
+		final String tablePadding = padding + "          ";
+		final String tableHr = tablePadding + "+--------------+------+------+------+------+------+------+------------+";
+		final String[] possiblePages = {
+			"customer-reports",
+			"home"
+		};
+		HashMap<String, int[]> map = data.getRecordsAllDetails();
+
+		System.out.println(tableHr + "\n" + tablePadding + "| Phone Number |  XS  |   S  |   M  |   L  |  XL  |  XXL |    Total   |\n" + tableHr);
+
+		for (String phone : map.keySet()) {
+			int[] record = map.get(phone);
+			
+			System.out.printf(
+				tablePadding + "|  %s  | %4d | %4d | %4d | %4d | %4d | %4d | %7d.00 |\n" + tableHr + "\n",
+				phone,
+				record[0],
+				record[1],
+				record[2],
+				record[3],
+				record[4],
+				record[5],
+				record[6]
+			);
+		}
+
+		System.out.println();
+		System.out.println(padding + "       [1] Return to Customer Reports\n");
+		System.out.println(padding + "       [2] Return to Main Menu\n");
+
+		int option;
+		
+		while (true) {
+			option = console.getInteger(padding + "Enter Option : ");
+
+			if (option == 1 || option == 2) {
+				break;
+			}
+
+			console.clearLine(1);
+		}
+
+		goToPage(possiblePages[option - 1]);
 	}
 
 	public static void bestInItemByQty () {
