@@ -241,4 +241,32 @@ class ShopData {
 
 		return map;
 	}
+
+	public HashMap<String, int[]> getItemsDetails () {
+		HashMap<String, int[]> map = new HashMap<>();
+
+		for (int i = 0; i < this.idList.size(); i++) {
+			int size = this.sizesList.get(i);
+			String sizeStr = this.sizes[size];
+			int[] record;
+
+			if (map.containsKey(sizeStr)) {
+				record = map.get(sizeStr);
+			} else {
+				record = new int[2];
+				map.put(sizeStr, record);
+			}
+
+			record[0] += this.qtyList.get(i);
+			record[1] += this.amountList.get(i);
+		}
+
+		for (String size : this.sizes) {
+			if (!map.containsKey(size)) {
+				map.put(size, new int[] { 0, 0 });
+			}
+		}
+
+		return map;
+	}
 }
