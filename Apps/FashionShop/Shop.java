@@ -185,8 +185,6 @@ class Shop {
 			console.clearLine(1);
 		}
 
-		data.printData();
-
 		printRecordData(id - 1);
 		boolean response = console.getUserResponse(padding + "Do you want to search another order? (y/n) : ");
 
@@ -247,7 +245,7 @@ class Shop {
 
 		printRecordData(id - 1);
 
-		int index = data.idList.indexOf(id);
+		int index = data.idList.indexOf(id - 1);
 		int status = data.statusList.get(index);
 
 		if (status < 2) {
@@ -336,7 +334,7 @@ class Shop {
 		System.out.println();
 
 		if (response) {
-			data.deleteRecord(id);
+			data.deleteRecord(id - 1);
 			System.out.println(padding + "          Order Deleted!");
 			System.out.println();
 		}
