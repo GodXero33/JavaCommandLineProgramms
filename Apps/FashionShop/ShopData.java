@@ -57,72 +57,7 @@ class ShopData {
 			instance.amountList.add(amount);
 
 			instance.size++;
-		}
-
-		instance.idList.add(15);
-		instance.statusList.add(0);
-		instance.phoneList.add("0770110488");
-		instance.sizesList.add(0);
-		instance.qtyList.add(1);
-		instance.amountList.add(600.0);
-
-		instance.idList.add(16);
-		instance.statusList.add(0);
-		instance.phoneList.add("0770110488");
-		instance.sizesList.add(3);
-		instance.qtyList.add(3);
-		instance.amountList.add(2600.0);
-
-		instance.current = 16;
-		instance.size += 2;
-	}
-
-	private static String getTableHR (int ...cols) {
-		final StringBuilder stringBuilder = new StringBuilder();
-		final String hrSym = "-";
-
-		stringBuilder.append("+");
-
-		for (int size : cols) {
-			stringBuilder.append(hrSym.repeat(size));
-			stringBuilder.append("+");
-		}
-
-		final String output = stringBuilder.toString();
-		return output;
-	}
-
-	public void printData () {
-		String tableHr = ShopData.getTableHR(8, 9);
-
-		System.out.println(tableHr);
-		System.out.println("|  size  |  price  |");
-		System.out.println(tableHr);
-
-		for (int i = 0; i < this.sizes.length; i++) {
-			final String str = String.format("|  %-4s  | %7.2f |", this.sizes[i], this.prices[i]);
-
-			System.out.println(str);
-			System.out.println(tableHr);
-		}
-
-		tableHr = ShopData.getTableHR(13, 10, 14, 8, 7, 16);
-
-		System.out.println(tableHr);
-		System.out.println("|     id      |  status  |    phone     |  size  |  qty  |     amount     |");
-		System.out.println(tableHr);
-
-		for (int i = 0; i < this.idList.size(); i++) {
-			System.out.printf(
-				"|  %9s  |    %2d    |  %10s  |  %4s  | %5d |   %10.2f   |\n",
-				this.getOrderID(this.idList.get(i)),
-				this.statusList.get(i),
-				this.phoneList.get(i),
-				this.sizesList.get(i),
-				this.qtyList.get(i),
-				this.amountList.get(i)
-			);
-			System.out.println(tableHr);
+			instance.current++;
 		}
 	}
 
